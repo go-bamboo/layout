@@ -16,7 +16,6 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/ratelimit"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"go.uber.org/zap/zapcore"
 )
 
 func v1Router(v1 *gin.RouterGroup, s *service.V1Service) {
@@ -45,8 +44,7 @@ func RegisterApiHTTPServer(httpSrv *http.Server, s *service.V1Service) {
 }
 
 // NewHTTPServer new a HTTP server.
-func NewHTTPServer(c *conf.Server, logger zapcore.Core, admin *service.AdminService, v1Srv *service.V1Service) *http.Server {
-
+func NewHTTPServer(c *conf.Server, admin *service.AdminService, v1Srv *service.V1Service) *http.Server {
 	httpSrv := rest.NewServer(c.Http)
 	adminpb.RegisterQuantBotAdminHTTPServer(httpSrv, admin)
 	RegisterApiHTTPServer(httpSrv, v1Srv)

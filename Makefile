@@ -66,3 +66,11 @@ run:
 .PHONY: install
 install:
 	cd cmd/layout && go install
+
+.PHONY: migrate
+migrate:
+	goctl migrate up --c ./configs/conf.yaml
+
+.PHONY: gen
+gen:
+	goctl gormgen --c ./configs/conf.yaml
