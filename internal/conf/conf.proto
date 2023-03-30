@@ -1,5 +1,5 @@
 syntax = "proto3";
-package service.ex.internal.conf;
+package layout.internal.conf;
 
 option go_package = "github.com/go-bamboo/layout/internal/conf;conf";
 
