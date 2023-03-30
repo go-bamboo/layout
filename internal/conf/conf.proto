@@ -22,7 +22,6 @@ message Bootstrap {
   log.Conf logger = 6;
   RabbitMq rabbitMq = 7;
   Kafka kafka = 8;
-  Market market = 9;
 }
 
 message Service {
@@ -85,9 +84,4 @@ message Kafka {
   Net net = 3;
   Consumer consumer = 4;
   Producer producer = 5;
-}
-
-message Market {
-    string apiKey = 1;
-    string secretKey = 2;
 }
