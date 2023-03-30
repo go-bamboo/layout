@@ -18,7 +18,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/anypb"
 
-	quantbot "github.com/go-bamboo/layout/api/layout"
+	layout "github.com/go-bamboo/layout/api/layout"
 )
 
 // ensure the imports are used
@@ -36,7 +36,7 @@ var (
 	_ = anypb.Any{}
 	_ = sort.Sort
 
-	_ = quantbot.BotSource(0)
+	_ = layout.BotSource(0)
 )
 
 // Validate checks the field values on PageBotRequest with the rules defined in
@@ -911,7 +911,7 @@ var _ interface {
 	ErrorName() string
 } = CreateBotRequestValidationError{}
 
-var _CreateBotRequest_Source_InLookup = map[quantbot.BotSource]struct{}{
+var _CreateBotRequest_Source_InLookup = map[layout.BotSource]struct{}{
 	0: {},
 }
 
@@ -1192,7 +1192,7 @@ var _ interface {
 	ErrorName() string
 } = UpdateBotRequestValidationError{}
 
-var _UpdateBotRequest_Source_InLookup = map[quantbot.BotSource]struct{}{
+var _UpdateBotRequest_Source_InLookup = map[layout.BotSource]struct{}{
 	0: {},
 }
 

@@ -22,7 +22,7 @@ errors:
            --proto_path=$(PWD)/../third_party \
            --go_out=paths=source_relative:. \
            --go-errors_out=paths=source_relative:. \
-           ./api/quantbot/ecode.proto
+           ./api/layout/ecode.proto
 
 .PHONY: api
 api:
@@ -37,7 +37,7 @@ api:
            --go-http_out=paths=source_relative:. \
            --go-errors_out=paths=source_relative:. \
            --validate_out=lang=go,paths=source_relative:. \
-           ./api/quantbot/types.proto ./api/quantbot/v1/api.proto ./api/quantbot/admin/admin.proto
+           ./api/layout/types.proto ./api/layout/v1/api.proto ./api/layout/admin/admin.proto
 
 .PHONY: proto
 proto:

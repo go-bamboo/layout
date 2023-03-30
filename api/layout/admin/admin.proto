@@ -58,7 +58,7 @@ message PageBotRequest {
 }
 message PageBotReply {
 	int32 total = 1;
-	repeated api.quantbot.Bot data = 2;
+	repeated api.layout.Bot data = 2;
 }
 
 message ListBotRequest {
@@ -66,18 +66,18 @@ message ListBotRequest {
 	int32 status = 2;
 }
 message ListBotReply {
-	repeated api.quantbot.Bot data = 1;
+	repeated api.layout.Bot data = 1;
 }
 
 message GetBotRequest {
 	uint64 id = 1;
 }
 message GetBotReply {
-	api.quantbot.Bot data = 1;
+	api.layout.Bot data = 1;
 }
 
 message CreateBotRequest {
-	api.quantbot.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
+	api.layout.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
 	string botId = 3 [(validate.rules).string = {min_len : 1}];
 	string subId = 4 [(validate.rules).string = {min_len : 1}];
 	string driverType = 5 [(validate.rules).string = {min_len : 1}];
@@ -88,7 +88,7 @@ message CreateBotReply {}
 
 message UpdateBotRequest {
 	uint64 id = 1 [(validate.rules).uint64 = {gt: 0}];
-	api.quantbot.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
+	api.layout.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
 	string botId = 3 [(validate.rules).string = {min_len : 1}];
 	string subId = 4 [(validate.rules).string = {min_len : 1}];
 	string driverType = 5 [(validate.rules).string = {min_len : 1}];

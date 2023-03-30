@@ -11,7 +11,7 @@ import "errors/errors.proto";
 option go_package = "github.com/go-bamboo/layout/v1;v1";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	info: {
-		title: "交易所信息服务文档";
+		title: "信息服务文档";
 		version: "1.0";
 	};
 	schemes: HTTP;
@@ -51,13 +51,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	}
 };
 
-service QuantBotV1 {
+service LayoutV1 {
 	option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
 		description: "地址API接口"
 	};
 	rpc ChainBotWebHook (ChainBotWebHookRequest) returns (ChainBotWebHookReply) {
 		option (google.api.http) = {
-			post: "/api/v1/chainbot/webhook"
+			post: "/api/v1/layout/webhook"
 			body: "*"
 		};
 		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
