@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api.layout.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors/errors.proto";
+
+option go_package = "github.com/go-bamboo/layout/v1;v1";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+	info: {
+		title: "交易所信息服务文档";
+		version: "1.0";
+	};
+	schemes: HTTP;
+	schemes: HTTPS;
+	consumes: "application/json";
+	consumes: "application/x-foo-mime";
+	produces: "application/json";
+	produces: "application/x-foo-mime";
+	security_definitions: {
+		security: {
+			key: "BasicAuth";
+			value: {
+				type: TYPE_BASIC;
+			}
+		}
+	}
+	responses: {
+		key: "500";
+		value: {
+			description: "Server error";
+			headers: {
+				key: "X-Correlation-Id"
+				value: {
+					description: "Unique event identifier for server requests"
+					type: "string"
+					format: "uuid"
+					default: "\"2438ac3c-37eb-4902-adef-ed16b4431030\""
+					pattern: "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+				}
+			};
+			schema: {
+				json_schema: {
+					ref: ".errors.Error"
+				}
+			}
+		}
+	}
+};
+
+service QuantBotV1 {
+	option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+		description: "地址API接口"
+	};
+	rpc ChainBotWebHook (ChainBotWebHookRequest) returns (ChainBotWebHookReply) {
+		option (google.api.http) = {
+			post: "/api/v1/chainbot/webhook"
+			body: "*"
+		};
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+			summary: "使用地址";
+		};
+	};
+}
+
+message ChainBotWebHookRequest {}
+message ChainBotWebHookReply {}

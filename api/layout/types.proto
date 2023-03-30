@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package api.layout;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors/errors.proto";
+
+option go_package = "github.com/go-bamboo/layout/api/layout;layout";
+
+enum BotSource {
+  ChainBot = 0;
+}
+
+message Bot {
+  uint64 id = 1;
+  BotSource source = 2;
+  string botId = 3;
+  string subId = 4;
+  string driverType = 5;
+  string notifyTemplate = 6;
+  uint64 templateId = 7;
+}

@@ -1,0 +1,105 @@
+service:
+  name: layout
+  version: v1.0.0
+server:
+  http:
+    address: 0.0.0.0:8030
+    timeout: 1000s
+  grpc:
+    address: 0.0.0.0:9030
+    timeout: 1000s
+data:
+  database:
+    driver: mysql
+    source: root:123456@tcp(127.0.0.1:3306)/virtualLife?charset=utf8mb4&parseTime=true
+    logLevel: 4
+    db: layout
+    timeout: 10s
+  redis:
+    addr: 127.0.0.1:6379
+    dial_timeout: 0.1s
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+reg:
+  etcd:
+    enable: false
+    endpoints:
+      - "127.0.0.1:2379"
+    dialTimeout: 3s
+  consul:
+    enable: false
+    address: "127.0.0.1:8500"
+    dialTimeout: 3s
+  kube:
+    enable: false
+  nacos:
+    enable: true
+    ipAddr: nacos-test.music-z.com
+    port: 80
+    namespace: 40da457f-331b-4090-9f7f-6888ea5451e0
+trace:
+  stdout:
+    enable: true
+    traces: true
+    trace_output: no
+    metrics: true
+    metric_output: no
+  jaeger:
+    enable: false
+    endpoint: http://127.0.0.1:14268/api/traces
+  otlp:
+    enable: false
+  prom:
+    enable: false
+logger:
+  console:
+    enable: true
+    level: -1
+  file:
+    enable: true
+    level: -1
+    path: ./logs
+    name: layout
+  fluent:
+    enable: false
+rabbitMq:
+  address: amqp://admin:123456@127.0.0.1:5672/my_vhost
+  consumer:
+    queue:
+      - xx
+market:
+  apiKey: "nrmLW05FF1oMmS83Se4dWVNJ2G6tbZX0OC9QqUninWxnvKRaJm6m0hkPkxhOaw4L"
+  secretKey: "VQUY39osEdj7XXKP1vB7WNp2AMsX78kz6mVNfAgrVG32tTEdvqxebHYjC1mY7nqc"
+genGorm:
+  version: "0.1"
+  database:
+    # consult[https://gorm.io/docs/connecting_to_the_database.html]"
+    dsn : "root:123456@tcp(127.0.0.1:3306)/layout?charset=utf8mb4&parseTime=True&loc=Local"
+#    dsn: "data/layout.db"
+    # input mysql or postgres or sqlite or sqlserver. consult[https://gorm.io/docs/connecting_to_the_database.html]
+    db: "sqlite"
+    # enter the required data table or leave it blank.You can input : 
+    tables:
+      - layout_bot
+    # specify a directory for output
+    outPath :  "./internal/dao/query"
+    # query code file name, default: gen.go
+    outFile :  ""
+    # generate unit test for query code
+    withUnitTest  : false
+    # generated model code's package name
+    modelPkgName  : ""
+    # generate with pointer when field is nullable
+    fieldNullable : false
+    # generate field with gorm index tag
+    fieldWithIndexTag : false
+    # generate field with gorm column type tag
+    fieldWithTypeTag  : false
+    # detect integer field's unsigned type, adjust generated data type
+    fieldSignable  : false
+migrate:
+  version: "0.1"
+  source: file://./migrations
+  path: ./migrations
+  database: mysql://root:123456@tcp(127.0.0.1:3306)/layout?charset=utf8mb4&parseTime=True&loc=Local
+#  database: sqlite3://data/layout.db

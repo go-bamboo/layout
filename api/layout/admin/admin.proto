@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+package api.layout.admin;
+
+import "api/layout/types.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors/errors.proto";
+
+option go_package = "github.com/go-bamboo/layout/api/layout/admin;admin";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+	info: {
+		title: "后台服务文档";
+		version: "1.0";
+	};
+	schemes: HTTP;
+	schemes: HTTPS;
+	consumes: "application/json";
+	consumes: "application/x-foo-mime";
+	produces: "application/json";
+	produces: "application/x-foo-mime";
+	security_definitions: {
+		security: {
+			key: "BasicAuth";
+			value: {
+				type: TYPE_BASIC;
+			}
+		}
+	}
+	responses: {
+		key: "500";
+		value: {
+			description: "Server error";
+			headers: {
+				key: "X-Correlation-Id"
+				value: {
+					description: "Unique event identifier for server requests"
+					type: "string"
+					format: "uuid"
+					default: "\"2438ac3c-37eb-4902-adef-ed16b4431030\""
+					pattern: "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+				}
+			};
+			schema: {
+				json_schema: {
+					ref: ".errors.Error"
+				}
+			}
+		}
+	}
+};
+
+message PageBotRequest {
+	int32 pageSize = 1;
+	int32 pageIndex = 2;
+}
+message PageBotReply {
+	int32 total = 1;
+	repeated api.quantbot.Bot data = 2;
+}
+
+message ListBotRequest {
+	string chiainId = 1;
+	int32 status = 2;
+}
+message ListBotReply {
+	repeated api.quantbot.Bot data = 1;
+}
+
+message GetBotRequest {
+	uint64 id = 1;
+}
+message GetBotReply {
+	api.quantbot.Bot data = 1;
+}
+
+message CreateBotRequest {
+	api.quantbot.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
+	string botId = 3 [(validate.rules).string = {min_len : 1}];
+	string subId = 4 [(validate.rules).string = {min_len : 1}];
+	string driverType = 5 [(validate.rules).string = {min_len : 1}];
+	string notifyTemplate = 6 [(validate.rules).string = {min_len : 1}];
+	uint64 templateId = 7 [(validate.rules).uint64 = {gt: 0}];
+}
+message CreateBotReply {}
+
+message UpdateBotRequest {
+	uint64 id = 1 [(validate.rules).uint64 = {gt: 0}];
+	api.quantbot.BotSource source = 2 [(validate.rules).enum = {in : [0]}];
+	string botId = 3 [(validate.rules).string = {min_len : 1}];
+	string subId = 4 [(validate.rules).string = {min_len : 1}];
+	string driverType = 5 [(validate.rules).string = {min_len : 1}];
+	string notifyTemplate = 6 [(validate.rules).string = {min_len : 1}];
+	uint64 templateId = 7 [(validate.rules).uint64 = {gt: 0}];
+}
+message UpdateBotReply {}
+
+message DeleteBotRequest {
+	string ids = 1;
+}
+message DeleteBotReply {}
+
+
+service QuantBotAdmin {
+	option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+		description: "ethbw 后台接口"
+	};
+	rpc PageBot (PageBotRequest) returns (PageBotReply) {
+		option (google.api.http) = {
+			get: "/admin/v1/layout/botPage"
+		};
+	};
+	rpc ListBot (ListBotRequest) returns (ListBotReply) {
+		option (google.api.http) = {
+			get: "/admin/v1/layout/botList"
+		};
+	};
+	rpc GetBot (GetBotRequest) returns (GetBotReply) {
+		option (google.api.http) = {
+			get: "/admin/v1/layout/bot/{id}"
+		};
+	};
+	rpc CreateBot (CreateBotRequest) returns (CreateBotReply) {
+		option (google.api.http) = {
+			post: "/admin/v1/layout/bot"
+			body: "*"
+		};
+	};
+	rpc UpdateBot (UpdateBotRequest) returns (UpdateBotReply){
+		option (google.api.http) = {
+			put: "/admin/v1/layout/bot"
+			body: "*"
+		};
+	};
+	rpc DeleteBot (DeleteBotRequest) returns (DeleteBotReply) {
+		option (google.api.http) = {
+			delete: "/admin/v1/layout/bot/{ids}"
+		};
+	};
+}

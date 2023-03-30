@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api.layout;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors/errors.proto";
+
+option go_package = "github.com/go-bamboo/layout/api/layout;layout";
+
+enum ErrorReason {
+  // 设置缺省错误码
+  option (errors.default_code) = 500;
+
+  // 为某个枚举单独设置错误码
+  USER_NOT_FOUND = 0 [(errors.code) = 404];
+
+  CONTENT_MISSING = 1 [(errors.code) = 400];
+
+  BOT_EXIST = 2;
+
+  SUBSCRIPTION_NOT_EXIST = 3;
+
+  SUBSCRIPTION_ID_NOT_EXIST = 4;
+
+  TEMPLATE_NOT_FOUND = 5;
+
+  COPIER_COV = 6;
+}
