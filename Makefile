@@ -61,8 +61,8 @@ test:
 
 .PHONY: run
 run:
-	./bin/quantbot -conf file:///configs/conf.yaml
+	./bin/layout -conf file:///configs/conf.yaml
 
 .PHONY: install
 install:
-	cd cmd/quantbot && go install
+	cd cmd/layout && go install
