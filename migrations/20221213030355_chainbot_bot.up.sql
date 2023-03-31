@@ -13,12 +13,9 @@
  Date: 13/12/2022 15:22:06
 */
 
-PRAGMA foreign_keys = false;
-
 -- ----------------------------
 -- Table structure for layout_bot
 -- ----------------------------
-DROP TABLE IF EXISTS "layout_bot";
 CREATE TABLE "layout_bot" (
     "id" bigint unsigned,
     "source" integer,
@@ -32,5 +29,3 @@ CREATE TABLE "layout_bot" (
     "deleted_at" datetime,
     PRIMARY KEY ("id")
 );
-
-PRAGMA foreign_keys = true;
