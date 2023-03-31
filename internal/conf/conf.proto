@@ -36,10 +36,6 @@ message Server {
 
 message Data {
   store.gormx.Conf database = 1;
-  string kline1mCSV = 2;
-  string kline15mCSV = 3;
-  string kline30mCSV = 4;
-  string csvPath = 5;
 }
 
 message RabbitMq {
