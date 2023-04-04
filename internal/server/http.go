@@ -43,7 +43,7 @@ func RegisterApiHTTPServer(httpSrv *http.Server, s *service.V1Service) {
 }
 
 // NewHTTPServer new a HTTP server.
-func NewHTTPServer(c *conf.Server, admin *service.AdminService, v1Srv *service.V1Service) *http.Server {
+func NewHTTPServer(c *conf.Server, admin *service.AdminService, v1Srv *service.V1Service) *rest.Server {
 	httpSrv := rest.NewServer(c.Http)
 	RegisterApiHTTPServer(httpSrv, v1Srv)
 	return httpSrv

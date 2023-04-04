@@ -9,15 +9,9 @@ server:
     address: 0.0.0.0:9034
     timeout: 1000s
 data:
-  order:
-    driver: sqlite
-    source: "../../data/order.db"
-    logLevel: 4
-    db: layout
-    timeout: 10s
-  kline:
-    driver: sqlite
-    source: "../../data/kline.db"
+  database:
+    driver: mysql
+    source: root:123456@tcp(127.0.0.1:3306)/virtualLife?charset=utf8mb4&parseTime=true
     logLevel: 4
     db: layout
     timeout: 10s
@@ -26,8 +20,6 @@ data:
     dial_timeout: 0.1s
     read_timeout: 0.2s
     write_timeout: 0.2s
-  migrate:
-    path: file://../../migrations
 reg:
   etcd:
     enable: false

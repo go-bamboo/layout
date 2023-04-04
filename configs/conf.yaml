@@ -67,9 +67,6 @@ rabbitMq:
   consumer:
     queue:
       - xx
-market:
-  apiKey: "nrmLW05FF1oMmS83Se4dWVNJ2G6tbZX0OC9QqUninWxnvKRaJm6m0hkPkxhOaw4L"
-  secretKey: "VQUY39osEdj7XXKP1vB7WNp2AMsX78kz6mVNfAgrVG32tTEdvqxebHYjC1mY7nqc"
 genGorm:
   version: "0.1"
   database:
