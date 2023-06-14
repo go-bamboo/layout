@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: api/layout/v1/api.proto
+// source: api/helloworld/v1/api.proto
 
 package v1
 
@@ -35,7 +35,7 @@ func NewLayoutV1Client(cc grpc.ClientConnInterface) LayoutV1Client {
 
 func (c *layoutV1Client) ChainBotWebHook(ctx context.Context, in *ChainBotWebHookRequest, opts ...grpc.CallOption) (*ChainBotWebHookReply, error) {
 	out := new(ChainBotWebHookReply)
-	err := c.cc.Invoke(ctx, "/api.layout.v1.LayoutV1/ChainBotWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.helloworld.v1.LayoutV1/ChainBotWebHook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _LayoutV1_ChainBotWebHook_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.layout.v1.LayoutV1/ChainBotWebHook",
+		FullMethod: "/api.helloworld.v1.LayoutV1/ChainBotWebHook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LayoutV1Server).ChainBotWebHook(ctx, req.(*ChainBotWebHookRequest))
@@ -92,7 +92,7 @@ func _LayoutV1_ChainBotWebHook_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LayoutV1_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.layout.v1.LayoutV1",
+	ServiceName: "api.helloworld.v1.LayoutV1",
 	HandlerType: (*LayoutV1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -101,5 +101,5 @@ var LayoutV1_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/layout/v1/api.proto",
+	Metadata: "api/helloworld/v1/api.proto",
 }

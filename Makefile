@@ -22,7 +22,7 @@ errors:
            --proto_path=$(PWD)/../third_party \
            --go_out=paths=source_relative:. \
            --go-errors_out=paths=source_relative:. \
-           ./api/layout/ecode.proto
+           ./api/helloworld/ecode.proto
 
 .PHONY: api
 api:
@@ -37,7 +37,7 @@ api:
            --go-http_out=paths=source_relative:. \
            --go-errors_out=paths=source_relative:. \
            --validate_out=lang=go,paths=source_relative:. \
-           ./api/layout/types.proto ./api/layout/v1/api.proto ./api/layout/admin/admin.proto
+           ./api/helloworld/types.proto ./api/helloworld/v1/api.proto ./api/helloworld/admin/admin.proto
 
 .PHONY: proto
 proto:
@@ -61,11 +61,11 @@ test:
 
 .PHONY: run
 run:
-	./bin/layout -conf file:///configs/conf.yaml
+	./bin/server -conf file:///configs/conf.yaml
 
 .PHONY: install
 install:
-	cd cmd/layout && go install
+	cd cmd/server && go install
 
 .PHONY: migrate
 migrate:

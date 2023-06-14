@@ -6,6 +6,7 @@ import (
 	"github.com/go-bamboo/pkg/config"
 	"github.com/go-bamboo/pkg/log"
 	"github.com/go-bamboo/pkg/otel"
+	"github.com/go-bamboo/pkg/registry"
 	"github.com/google/uuid"
 )
 
@@ -38,7 +39,7 @@ func main() {
 	}
 
 	// consul
-	//r := registry.New(consulClient)
+	r, d := registry.New(bc.Reg)
 
 	// trace
 	tp, err := otel.NewProvider(bc.Trace, bc.Service.Name, id.String())
@@ -48,7 +49,7 @@ func main() {
 	}
 	defer tp.Close()
 
-	app, closeFunc, err := di.InitApp(id.String(), bc.Service, bc.Server, bc.Data, bc.Market, logger, nil, nil)
+	app, closeFunc, err := di.InitApp(id.String(), bc.Service, bc.Server, bc.Data, logger, r, d)
 	if err != nil {
 		log.Errorf("err: %v", err.Error())
 		return

@@ -3,12 +3,12 @@ package service
 import (
 	"context"
 
-	pb "github.com/go-bamboo/layout/api/layout/admin"
+	pb "github.com/go-bamboo/layout/api/helloworld/admin"
 	"github.com/go-bamboo/layout/internal/biz"
 )
 
 type AdminService struct {
-	pb.UnimplementedQuantBotAdminServer
+	pb.UnimplementedLayoutAdminServer
 }
 
 func NewAdminService(uc *biz.GreeterUsecase) *AdminService {

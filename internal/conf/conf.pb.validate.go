@@ -674,14 +674,6 @@ func (m *Data) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Kline1MCSV
-
-	// no validation rules for Kline15MCSV
-
-	// no validation rules for Kline30MCSV
-
-	// no validation rules for CsvPath
-
 	if len(errors) > 0 {
 		return DataMultiError(errors)
 	}

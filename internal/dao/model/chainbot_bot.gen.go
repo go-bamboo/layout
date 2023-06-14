@@ -5,7 +5,6 @@
 package model
 
 import (
-	pb "github.com/go-bamboo/layout/api/layout"
 	"time"
 
 	"gorm.io/gorm"
@@ -16,7 +15,6 @@ const TableNameChainbotBot = "chainbot_bot"
 // ChainbotBot mapped from table <chainbot_bot>
 type ChainbotBot struct {
 	ID             int64          `gorm:"column:id;primaryKey" json:"id"`
-	Source         pb.BotSource   `gorm:"column:source;not null" json:"source"`
 	BotID          string         `gorm:"column:bot_id;not null" json:"bot_id"`
 	SubID          string         `gorm:"column:sub_id;not null" json:"sub_id"`
 	DriverType     string         `gorm:"column:driver_type;not null" json:"driver_type"`

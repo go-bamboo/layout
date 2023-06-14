@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.5.2
 // - protoc             v3.21.12
-// source: api/layout/admin/admin.proto
+// source: api/helloworld/admin/admin.proto
 
 package admin
 
@@ -19,14 +19,14 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationQuantBotAdminCreateBot = "/api.layout.admin.QuantBotAdmin/CreateBot"
-const OperationQuantBotAdminDeleteBot = "/api.layout.admin.QuantBotAdmin/DeleteBot"
-const OperationQuantBotAdminGetBot = "/api.layout.admin.QuantBotAdmin/GetBot"
-const OperationQuantBotAdminListBot = "/api.layout.admin.QuantBotAdmin/ListBot"
-const OperationQuantBotAdminPageBot = "/api.layout.admin.QuantBotAdmin/PageBot"
-const OperationQuantBotAdminUpdateBot = "/api.layout.admin.QuantBotAdmin/UpdateBot"
+const OperationLayoutAdminCreateBot = "/api.helloworld.admin.LayoutAdmin/CreateBot"
+const OperationLayoutAdminDeleteBot = "/api.helloworld.admin.LayoutAdmin/DeleteBot"
+const OperationLayoutAdminGetBot = "/api.helloworld.admin.LayoutAdmin/GetBot"
+const OperationLayoutAdminListBot = "/api.helloworld.admin.LayoutAdmin/ListBot"
+const OperationLayoutAdminPageBot = "/api.helloworld.admin.LayoutAdmin/PageBot"
+const OperationLayoutAdminUpdateBot = "/api.helloworld.admin.LayoutAdmin/UpdateBot"
 
-type QuantBotAdminHTTPServer interface {
+type LayoutAdminHTTPServer interface {
 	CreateBot(context.Context, *CreateBotRequest) (*CreateBotReply, error)
 	DeleteBot(context.Context, *DeleteBotRequest) (*DeleteBotReply, error)
 	GetBot(context.Context, *GetBotRequest) (*GetBotReply, error)
@@ -35,23 +35,23 @@ type QuantBotAdminHTTPServer interface {
 	UpdateBot(context.Context, *UpdateBotRequest) (*UpdateBotReply, error)
 }
 
-func RegisterQuantBotAdminHTTPServer(s *http.Server, srv QuantBotAdminHTTPServer) {
+func RegisterLayoutAdminHTTPServer(s *http.Server, srv LayoutAdminHTTPServer) {
 	r := s.Route("/")
-	r.GET("/admin/v1/layout/botPage", _QuantBotAdmin_PageBot0_HTTP_Handler(srv))
-	r.GET("/admin/v1/layout/botList", _QuantBotAdmin_ListBot0_HTTP_Handler(srv))
-	r.GET("/admin/v1/layout/bot/{id}", _QuantBotAdmin_GetBot0_HTTP_Handler(srv))
-	r.POST("/admin/v1/layout/bot", _QuantBotAdmin_CreateBot0_HTTP_Handler(srv))
-	r.PUT("/admin/v1/layout/bot", _QuantBotAdmin_UpdateBot0_HTTP_Handler(srv))
-	r.DELETE("/admin/v1/layout/bot/{ids}", _QuantBotAdmin_DeleteBot0_HTTP_Handler(srv))
+	r.GET("/admin/v1/layout/botPage", _LayoutAdmin_PageBot0_HTTP_Handler(srv))
+	r.GET("/admin/v1/layout/botList", _LayoutAdmin_ListBot0_HTTP_Handler(srv))
+	r.GET("/admin/v1/layout/bot/{id}", _LayoutAdmin_GetBot0_HTTP_Handler(srv))
+	r.POST("/admin/v1/layout/bot", _LayoutAdmin_CreateBot0_HTTP_Handler(srv))
+	r.PUT("/admin/v1/layout/bot", _LayoutAdmin_UpdateBot0_HTTP_Handler(srv))
+	r.DELETE("/admin/v1/layout/bot/{ids}", _LayoutAdmin_DeleteBot0_HTTP_Handler(srv))
 }
 
-func _QuantBotAdmin_PageBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_PageBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PageBotRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminPageBot)
+		http.SetOperation(ctx, OperationLayoutAdminPageBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.PageBot(ctx, req.(*PageBotRequest))
 		})
@@ -64,13 +64,13 @@ func _QuantBotAdmin_PageBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx 
 	}
 }
 
-func _QuantBotAdmin_ListBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_ListBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListBotRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminListBot)
+		http.SetOperation(ctx, OperationLayoutAdminListBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListBot(ctx, req.(*ListBotRequest))
 		})
@@ -83,7 +83,7 @@ func _QuantBotAdmin_ListBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx 
 	}
 }
 
-func _QuantBotAdmin_GetBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_GetBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetBotRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -92,7 +92,7 @@ func _QuantBotAdmin_GetBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx h
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminGetBot)
+		http.SetOperation(ctx, OperationLayoutAdminGetBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetBot(ctx, req.(*GetBotRequest))
 		})
@@ -105,13 +105,13 @@ func _QuantBotAdmin_GetBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx h
 	}
 }
 
-func _QuantBotAdmin_CreateBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_CreateBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateBotRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminCreateBot)
+		http.SetOperation(ctx, OperationLayoutAdminCreateBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateBot(ctx, req.(*CreateBotRequest))
 		})
@@ -124,13 +124,13 @@ func _QuantBotAdmin_CreateBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ct
 	}
 }
 
-func _QuantBotAdmin_UpdateBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_UpdateBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateBotRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminUpdateBot)
+		http.SetOperation(ctx, OperationLayoutAdminUpdateBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateBot(ctx, req.(*UpdateBotRequest))
 		})
@@ -143,7 +143,7 @@ func _QuantBotAdmin_UpdateBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ct
 	}
 }
 
-func _QuantBotAdmin_DeleteBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ctx http.Context) error {
+func _LayoutAdmin_DeleteBot0_HTTP_Handler(srv LayoutAdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteBotRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -152,7 +152,7 @@ func _QuantBotAdmin_DeleteBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ct
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationQuantBotAdminDeleteBot)
+		http.SetOperation(ctx, OperationLayoutAdminDeleteBot)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteBot(ctx, req.(*DeleteBotRequest))
 		})
@@ -165,7 +165,7 @@ func _QuantBotAdmin_DeleteBot0_HTTP_Handler(srv QuantBotAdminHTTPServer) func(ct
 	}
 }
 
-type QuantBotAdminHTTPClient interface {
+type LayoutAdminHTTPClient interface {
 	CreateBot(ctx context.Context, req *CreateBotRequest, opts ...http.CallOption) (rsp *CreateBotReply, err error)
 	DeleteBot(ctx context.Context, req *DeleteBotRequest, opts ...http.CallOption) (rsp *DeleteBotReply, err error)
 	GetBot(ctx context.Context, req *GetBotRequest, opts ...http.CallOption) (rsp *GetBotReply, err error)
@@ -174,19 +174,19 @@ type QuantBotAdminHTTPClient interface {
 	UpdateBot(ctx context.Context, req *UpdateBotRequest, opts ...http.CallOption) (rsp *UpdateBotReply, err error)
 }
 
-type QuantBotAdminHTTPClientImpl struct {
+type LayoutAdminHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewQuantBotAdminHTTPClient(client *http.Client) QuantBotAdminHTTPClient {
-	return &QuantBotAdminHTTPClientImpl{client}
+func NewLayoutAdminHTTPClient(client *http.Client) LayoutAdminHTTPClient {
+	return &LayoutAdminHTTPClientImpl{client}
 }
 
-func (c *QuantBotAdminHTTPClientImpl) CreateBot(ctx context.Context, in *CreateBotRequest, opts ...http.CallOption) (*CreateBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) CreateBot(ctx context.Context, in *CreateBotRequest, opts ...http.CallOption) (*CreateBotReply, error) {
 	var out CreateBotReply
 	pattern := "/admin/v1/layout/bot"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationQuantBotAdminCreateBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminCreateBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -195,11 +195,11 @@ func (c *QuantBotAdminHTTPClientImpl) CreateBot(ctx context.Context, in *CreateB
 	return &out, err
 }
 
-func (c *QuantBotAdminHTTPClientImpl) DeleteBot(ctx context.Context, in *DeleteBotRequest, opts ...http.CallOption) (*DeleteBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) DeleteBot(ctx context.Context, in *DeleteBotRequest, opts ...http.CallOption) (*DeleteBotReply, error) {
 	var out DeleteBotReply
 	pattern := "/admin/v1/layout/bot/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationQuantBotAdminDeleteBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminDeleteBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -208,11 +208,11 @@ func (c *QuantBotAdminHTTPClientImpl) DeleteBot(ctx context.Context, in *DeleteB
 	return &out, err
 }
 
-func (c *QuantBotAdminHTTPClientImpl) GetBot(ctx context.Context, in *GetBotRequest, opts ...http.CallOption) (*GetBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) GetBot(ctx context.Context, in *GetBotRequest, opts ...http.CallOption) (*GetBotReply, error) {
 	var out GetBotReply
 	pattern := "/admin/v1/layout/bot/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationQuantBotAdminGetBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminGetBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -221,11 +221,11 @@ func (c *QuantBotAdminHTTPClientImpl) GetBot(ctx context.Context, in *GetBotRequ
 	return &out, err
 }
 
-func (c *QuantBotAdminHTTPClientImpl) ListBot(ctx context.Context, in *ListBotRequest, opts ...http.CallOption) (*ListBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) ListBot(ctx context.Context, in *ListBotRequest, opts ...http.CallOption) (*ListBotReply, error) {
 	var out ListBotReply
 	pattern := "/admin/v1/layout/botList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationQuantBotAdminListBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminListBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -234,11 +234,11 @@ func (c *QuantBotAdminHTTPClientImpl) ListBot(ctx context.Context, in *ListBotRe
 	return &out, err
 }
 
-func (c *QuantBotAdminHTTPClientImpl) PageBot(ctx context.Context, in *PageBotRequest, opts ...http.CallOption) (*PageBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) PageBot(ctx context.Context, in *PageBotRequest, opts ...http.CallOption) (*PageBotReply, error) {
 	var out PageBotReply
 	pattern := "/admin/v1/layout/botPage"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationQuantBotAdminPageBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminPageBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -247,11 +247,11 @@ func (c *QuantBotAdminHTTPClientImpl) PageBot(ctx context.Context, in *PageBotRe
 	return &out, err
 }
 
-func (c *QuantBotAdminHTTPClientImpl) UpdateBot(ctx context.Context, in *UpdateBotRequest, opts ...http.CallOption) (*UpdateBotReply, error) {
+func (c *LayoutAdminHTTPClientImpl) UpdateBot(ctx context.Context, in *UpdateBotRequest, opts ...http.CallOption) (*UpdateBotReply, error) {
 	var out UpdateBotReply
 	pattern := "/admin/v1/layout/bot"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationQuantBotAdminUpdateBot))
+	opts = append(opts, http.Operation(OperationLayoutAdminUpdateBot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {

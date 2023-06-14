@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.5.2
 // - protoc             v3.21.12
-// source: api/layout/v1/api.proto
+// source: api/helloworld/v1/api.proto
 
 package v1
 
@@ -19,7 +19,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationLayoutV1ChainBotWebHook = "/api.layout.v1.LayoutV1/ChainBotWebHook"
+const OperationLayoutV1ChainBotWebHook = "/api.helloworld.v1.LayoutV1/ChainBotWebHook"
 
 type LayoutV1HTTPServer interface {
 	ChainBotWebHook(context.Context, *ChainBotWebHookRequest) (*ChainBotWebHookReply, error)

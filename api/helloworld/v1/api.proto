@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package api.layout.v1;
+package api.helloworld.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
@@ -8,7 +8,7 @@ import "validate/validate.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "errors/errors.proto";
 
-option go_package = "github.com/go-bamboo/layout/v1;v1";
+option go_package = "github.com/go-bamboo/layout/api/helloworld/v1;v1";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	info: {
 		title: "信息服务文档";
