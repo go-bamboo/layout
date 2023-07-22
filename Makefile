@@ -59,6 +59,14 @@ build:
 test:
 	go test -v ./... -cover
 
+.PHONY: dev
+dev:
+	./bin/server -conf file:///configs/dev.yaml
+
+.PHONY: dev-test
+dev-test:
+	./bin/server -conf file:///configs/test.yaml
+
 .PHONY: run
 run:
 	./bin/server -conf file:///configs/conf.yaml
@@ -66,6 +74,14 @@ run:
 .PHONY: install
 install:
 	cd cmd/server && go install
+
+.PHONY: migrate-dev
+migrate-dev:
+	goctl migrate up --c ./configs/dev.yaml
+
+.PHONY: migrate-test
+migrate-test:
+	goctl migrate up --c ./configs/test.yaml
 
 .PHONY: migrate
 migrate:
