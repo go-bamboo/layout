@@ -1,31 +1,11 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : vultr的db
- Source Server Type    : SQLite
- Source Server Version : 3030001
- Source Schema         : main
-
- Target Server Type    : SQLite
- Target Server Version : 3030001
- File Encoding         : 65001
-
- Date: 13/12/2022 15:22:06
-*/
-
--- ----------------------------
--- Table structure for layout_bot
--- ----------------------------
-CREATE TABLE "layout_bot" (
-    "id" bigint unsigned,
-    "source" integer,
-    "bot_id" varchar(200),
-    "sub_id" varchar(200),
-    "driver_type" varchar(200),
-    "notify_template" text,
-    "template_id" bigint,
-    "created_at" datetime,
-    "updated_at" datetime,
-    "deleted_at" datetime,
-    PRIMARY KEY ("id")
-);
+CREATE TABLE `cex_order` (
+ `id` int unsigned NOT NULL AUTO_INCREMENT,
+ `symbol` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+ `price` int NOT NULL,
+ `quantity` int NOT NULL,
+ `status` int NOT NULL,
+ `created_at` datetime DEFAULT NULL,
+ `updated_at` datetime DEFAULT NULL,
+ `deleted_at` datetime DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -12,11 +12,11 @@ data:
   database:
     driver: mysql
     source: root:123456@tcp(127.0.0.1:3306)/virtualLife?charset=utf8mb4&parseTime=true
-    logLevel: 4
-    db: layout
-    timeout: 10s
+    logger:
+      logLevel: 4
   redis:
-    addr: 127.0.0.1:6379
+    addrs:
+      - 127.0.0.1:6379
     dial_timeout: 0.1s
     read_timeout: 0.2s
     write_timeout: 0.2s
@@ -58,7 +58,8 @@ logger:
   file:
     enable: false
     level: -1
-    path: ../../logs
+    path: ./logs
+    name: layout
   fluent:
     enable: false
 rabbitMq:
@@ -66,3 +67,8 @@ rabbitMq:
   consumer:
     queue:
       - xx
+migrate:
+  version: "0.1"
+  source: file://./migrations
+  path: ./migrations
+  database: mysql://root:xx@tcp(127.0.0.1:3306)/layout?charset=utf8mb4&parseTime=True&loc=Local
