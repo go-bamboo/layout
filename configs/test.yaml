@@ -67,6 +67,32 @@ rabbitMq:
   consumer:
     queue:
       - xx
+genGorm:
+  version: "0.1"
+  database:
+    # consult[https://gorm.io/docs/connecting_to_the_database.html]"
+    dsn : root:xx@tcp(127.0.0.1:3306)/layout?charset=utf8&parseTime=true
+    # input mysql or postgres or sqlite or sqlserver. consult[https://gorm.io/docs/connecting_to_the_database.html]
+    db: "mysql"
+    # enter the required data table or leave it blank.You can input :
+    tables:
+      - cex_order
+    # specify a directory for output
+    outPath :  "./internal/dao/query"
+    # query code file name, default: gen.go
+    outFile :  ""
+    # generate unit test for query code
+    withUnitTest  : false
+    # generated model code's package name
+    modelPkgName  : ""
+    # generate with pointer when field is nullable
+    fieldNullable : false
+    # generate field with gorm index tag
+    fieldWithIndexTag : false
+    # generate field with gorm column type tag
+    fieldWithTypeTag  : false
+    # detect integer field's unsigned type, adjust generated data type
+    fieldSignable  : false
 migrate:
   version: "0.1"
   source: file://./migrations
