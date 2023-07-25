@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.10.1
-	github.com/gin-gonic/gin v1.9.0
+	github.com/gin-gonic/gin v1.9.1
 	github.com/go-bamboo/pkg v0.0.29
 	github.com/go-kratos/aegis v0.1.4
 	github.com/go-kratos/gin v0.1.0

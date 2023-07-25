@@ -7,7 +7,6 @@ import (
 	"github.com/go-bamboo/pkg/log"
 	"github.com/go-bamboo/pkg/store/gormx"
 	"github.com/google/wire"
-	"github.com/sony/sonyflake"
 )
 
 var ProviderSet = wire.NewSet(NewQuery, New)
@@ -15,15 +14,12 @@ var ProviderSet = wire.NewSet(NewQuery, New)
 // Dao dao interface
 type Dao interface {
 	Ping(ctx context.Context) (err error)
-
-	Id() int64
 }
 
 // dao dao.
 type dao struct {
-	c  *conf.Data
-	q  *query.Query
-	sf *sonyflake.Sonyflake
+	c *conf.Data
+	q *query.Query
 }
 
 func NewQuery(c *conf.Data) *query.Query {
@@ -43,9 +39,6 @@ func newDao(c *conf.Data, q *query.Query) (d *dao, cb func(), err error) {
 	d = &dao{
 		c: c,
 		q: q,
-		sf: sonyflake.NewSonyflake(sonyflake.Settings{MachineID: func() (uint16, error) {
-			return 2, nil
-		}}),
 	}
 	cb = d.Close
 	return
@@ -58,12 +51,4 @@ func (d *dao) Close() {
 // Ping ping the resource.
 func (d *dao) Ping(ctx context.Context) (err error) {
 	return nil
-}
-
-func (d *dao) Id() int64 {
-	id, err := d.sf.NextID()
-	if err != nil {
-		return 0
-	}
-	return int64(id)
 }
