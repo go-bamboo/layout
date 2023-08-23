@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/go-bamboo/layout/cmd/server/start"
+	"github.com/go-bamboo/pkg/log"
 	"github.com/spf13/cobra"
 )
 
@@ -18,10 +20,6 @@ var (
 	BuildDate string
 )
 
-func main() {
-
-}
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "layout",
@@ -30,4 +28,15 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
+}
+
+func init() {
+	rootCmd.AddCommand(Cmd)
+	rootCmd.AddCommand(start.Cmd)
+}
+
+func main() {
+	if err := rootCmd.Execute(); err != nil {
+		log.Fatal(err)
+	}
 }
