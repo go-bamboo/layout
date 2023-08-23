@@ -1,10 +1,11 @@
-package main
+package version
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 )
 
-// go build -ldflags "-X main.Version=x.y.z"
+// go build -ldflags "-X version.Version=x.y.z"
 var (
 	// Name is the name of the compiled software.
 	Name string
@@ -18,16 +19,13 @@ var (
 	BuildDate string
 )
 
-func main() {
-
-}
-
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "layout",
-	Short: "layout",
-	Long:  `layout,`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+// Cmd represents the config command
+var Cmd = &cobra.Command{
+	Use:   "version",
+	Short: "version相关辅助工具",
+	Long:  `打印版本信息`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		fmt.Printf("version: %v-%v[%v]\n", Version, Revision, BuildDate)
+		return nil
+	},
 }
