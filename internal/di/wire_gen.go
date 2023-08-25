@@ -12,15 +12,16 @@ import (
 	"github.com/go-bamboo/layout/internal/dao"
 	"github.com/go-bamboo/layout/internal/server"
 	"github.com/go-bamboo/layout/internal/service"
+	"github.com/go-bamboo/pkg/log/core"
+	"github.com/go-bamboo/pkg/registry"
 	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/registry"
-	"go.uber.org/zap/zapcore"
+	registry2 "github.com/go-kratos/kratos/v2/registry"
 )
 
 // Injectors from wire.go:
 
 // initApp init kratos application.
-func InitApp(string2 string, confService *conf.Service, confServer *conf.Server, data *conf.Data, core zapcore.Core, registrar registry.Registrar, discovery registry.Discovery) (*kratos.App, func(), error) {
+func InitApp(string2 string, confService *conf.Service, confServer *conf.Server, data *conf.Data, logger core.Logger, registrar registry.Registrar, discovery registry2.Discovery) (*kratos.App, func(), error) {
 	grpcServer := server.NewGRPCServer(confServer)
 	query := dao.NewQuery(data)
 	daoDao, cleanup, err := dao.New(data, query)
@@ -35,7 +36,7 @@ func InitApp(string2 string, confService *conf.Service, confServer *conf.Server,
 	adminService := service.NewAdminService(greeterUsecase)
 	v1Service := service.NewV1Service(greeterUsecase)
 	httpServer := server.NewHTTPServer(confServer, adminService, v1Service)
-	app := newApp(string2, confService, core, grpcServer, httpServer, registrar)
+	app := newApp(string2, confService, logger, grpcServer, httpServer, registrar)
 	return app, func() {
 		cleanup()
 	}, nil

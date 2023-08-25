@@ -11,13 +11,13 @@ import (
 	"github.com/go-bamboo/layout/internal/dao"
 	"github.com/go-bamboo/layout/internal/server"
 	"github.com/go-bamboo/layout/internal/service"
+	"github.com/go-bamboo/pkg/log/core"
+	"github.com/go-bamboo/pkg/registry"
 	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/google/wire"
-	"go.uber.org/zap/zapcore"
 )
 
 // initApp init kratos application.
-func InitApp(string, *conf.Service, *conf.Server, *conf.Data, zapcore.Core, registry.Registrar, registry.Discovery) (*kratos.App, func(), error) {
+func InitApp(string, *conf.Service, *conf.Server, *conf.Data, core.Logger, registry.Registrar, registry.Discovery) (*kratos.App, func(), error) {
 	panic(wire.Build(server.ProviderSet, service.ProviderSet, biz.ProviderSet, dao.ProviderSet, newApp))
 }

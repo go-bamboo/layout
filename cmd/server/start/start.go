@@ -8,7 +8,7 @@ import (
 	"github.com/go-bamboo/pkg/log"
 	"github.com/go-bamboo/pkg/otel"
 	"github.com/go-bamboo/pkg/registry"
-	"github.com/google/uuid"
+	"github.com/go-bamboo/pkg/uuid"
 	"github.com/spf13/cobra"
 )
 
@@ -21,34 +21,38 @@ var (
 			return run(cmd.Context())
 		},
 	}
+	// cfg is the config remote addr
+	cfg string
 )
+
+func init() {
+	Cmd.Flags().StringVar(&cfg, "conf", "file:///../../configs/conf.yaml", "url for config eg: file:///../../configs/conf.yaml")
+}
 
 func run(ctx context.Context) error {
 	var bc conf.Bootstrap
-	config.Load(&bc)
+	config.Load(cfg, &bc)
 
 	logger := log.Init(bc.Logger)
 	defer logger.Close()
 
 	// uuid
-	id, err := uuid.NewUUID()
-	if err != nil {
-		log.Errorf("err: %v", err)
-		return err
-	}
+	id := uuid.New()
 
 	// consul
-	r, d := registry.New(bc.Reg)
-
-	// trace
-	tp, err := otel.NewProvider(bc.Trace, bc.Service.Name, id.String())
+	r, d, err := registry.Create(bc.Reg)
 	if err != nil {
 		log.Errorf("err: %v", err.Error())
 		return err
 	}
-	defer tp.Close()
 
-	app, closeFunc, err := di.InitApp(id.String(), bc.Service, bc.Server, bc.Data, logger, r, d)
+	// trace
+	if err := otel.Create(bc.Trace, bc.Service.Name, id); err != nil {
+		log.Errorf("err: %v", err.Error())
+		return err
+	}
+
+	app, closeFunc, err := di.InitApp(id, bc.Service, bc.Server, bc.Data, logger, r, d)
 	if err != nil {
 		log.Errorf("err: %v", err.Error())
 		return err

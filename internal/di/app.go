@@ -3,14 +3,14 @@ package di
 import (
 	"github.com/go-bamboo/layout/internal/conf"
 	"github.com/go-bamboo/pkg/log"
+	"github.com/go-bamboo/pkg/log/core"
+	"github.com/go-bamboo/pkg/registry"
+	"github.com/go-bamboo/pkg/rest"
+	"github.com/go-bamboo/pkg/rpc"
 	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/registry"
-	"github.com/go-kratos/kratos/v2/transport/grpc"
-	"github.com/go-kratos/kratos/v2/transport/http"
-	"go.uber.org/zap/zapcore"
 )
 
-func newApp(id string, srv *conf.Service, logger zapcore.Core, gs *grpc.Server, hs *http.Server, r registry.Registrar) *kratos.App {
+func newApp(id string, srv *conf.Service, logger core.Logger, gs *rpc.Server, hs *rest.Server, r registry.Registrar) *kratos.App {
 	app := kratos.New(
 		kratos.ID(id),
 		kratos.Name(srv.Name),

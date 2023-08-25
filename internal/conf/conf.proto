@@ -19,9 +19,7 @@ message Bootstrap {
   Data data = 3;
   registry.Conf reg = 4;
   otel.Conf trace = 5;
-  log.Conf logger = 6;
-  RabbitMq rabbitMq = 7;
-  Kafka kafka = 8;
+  repeated log.Conf logger = 6;
 }
 
 message Service {
@@ -36,48 +34,4 @@ message Server {
 
 message Data {
   store.gormx.Conf database = 1;
-}
-
-message RabbitMq {
-  message Consumer {
-    repeated string queue = 2;
-  }
-  string address = 1;
-  Consumer consumer = 2;
-}
-
-message Kafka {
-  message Net {
-    message SASL {
-      bool enable = 1;
-      string user = 2;
-      string password = 3;
-    }
-    message TLS {
-      bool enable = 1;
-      string rootCa = 2;
-      string jks = 3;
-      string password = 4;
-      string cert = 5;
-      string key = 6;
-
-    }
-    SASL sasl = 1;
-    TLS tls = 2;
-  }
-  message Consumer {
-    string topic = 2;
-    string group = 3;
-    google.protobuf.Duration read_timeout = 4;
-    google.protobuf.Duration write_timeout = 5;
-    int32 acks = 6;
-  }
-  message Producer {
-    string topic = 1;
-  }
-  bool enable = 1;
-  string brokers = 2;
-  Net net = 3;
-  Consumer consumer = 4;
-  Producer producer = 5;
 }

@@ -17,7 +17,7 @@ func TestMain(m *testing.M) {
 	flag.Set("conf", "file:///../../configs/test.yaml")
 	var err error
 	var bc conf.Bootstrap
-	config.Load(&bc)
+	config.LoadFlag(&bc)
 	var cf func()
 	if d, cf, err = newDao(bc.Data, nil); err != nil {
 		panic(err)
@@ -25,12 +25,4 @@ func TestMain(m *testing.M) {
 	ret := m.Run()
 	cf()
 	os.Exit(ret)
-}
-
-func TestDao_KLine(t *testing.T) {
-	d.KLine(&binance.WsKlineEvent{
-		Event:  "a",
-		Time:   1,
-		Symbol: "BTCUSDT",
-	})
 }
