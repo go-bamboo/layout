@@ -61,15 +61,15 @@ test:
 
 .PHONY: dev
 dev:
-	./bin/server -conf file:///configs/dev.yaml
+	./bin/server start --conf file:///configs/dev.yaml
 
 .PHONY: dev-test
 dev-test:
-	./bin/server -conf file:///configs/test.yaml
+	./bin/server start --conf file:///configs/test.yaml
 
 .PHONY: run
 run:
-	./bin/server -conf file:///configs/conf.yaml
+	./bin/server start --conf file:///configs/conf.yaml
 
 .PHONY: install
 install:

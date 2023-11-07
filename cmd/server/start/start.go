@@ -10,6 +10,11 @@ import (
 	"github.com/go-bamboo/pkg/registry"
 	"github.com/go-bamboo/pkg/uuid"
 	"github.com/spf13/cobra"
+
+	_ "github.com/go-bamboo/pkg/config/file"
+	_ "github.com/go-bamboo/pkg/log/file"
+	_ "github.com/go-bamboo/pkg/log/std"
+	_ "github.com/go-bamboo/pkg/otel/stdout"
 )
 
 var (
