@@ -77,16 +77,16 @@ install:
 
 .PHONY: migrate-dev
 migrate-dev:
-	goctl migrate up --c ./configs/dev.yaml
+	goctl migrate up -c ./configs/dev.yaml
 
 .PHONY: migrate-test
 migrate-test:
-	goctl migrate up --c ./configs/test.yaml
+	goctl migrate up -c ./configs/test.yaml
 
 .PHONY: migrate
 migrate:
-	goctl migrate up --c ./configs/conf.yaml
+	goctl migrate up -c ./configs/conf.yaml
 
 .PHONY: gen
 gen:
-	goctl gormgen --c ./configs/conf.yaml
+	goctl gormgen -c ./configs/conf.yaml
