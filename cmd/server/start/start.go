@@ -15,6 +15,7 @@ import (
 	_ "github.com/go-bamboo/pkg/log/file"
 	_ "github.com/go-bamboo/pkg/log/std"
 	_ "github.com/go-bamboo/pkg/otel/stdout"
+	_ "github.com/go-bamboo/pkg/registry/consul"
 )
 
 var (
