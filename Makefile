@@ -67,8 +67,8 @@ dev:
 dev-test:
 	./bin/server start --conf file:///configs/test.yaml
 
-.PHONY: run
-run:
+.PHONY: dev-prod
+dev-prod:
 	./bin/server start --conf file:///configs/conf.yaml
 
 .PHONY: install
@@ -83,8 +83,8 @@ migrate-dev:
 migrate-test:
 	goctl migrate up -c ./configs/test.yaml
 
-.PHONY: migrate
-migrate:
+.PHONY: migrate-prod
+migrate-prod:
 	goctl migrate up -c ./configs/conf.yaml
 
 .PHONY: gen
