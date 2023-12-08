@@ -4,7 +4,7 @@ import (
 	"context"
 	//alertmanagerpb "github.com/go-bamboo/api/alertmanager"
 	//uuidpb "github.com/go-bamboo/api/uuid"
-	"github.com/go-kratos/kratos/v2/registry"
+	"github.com/go-bamboo/pkg/registry"
 )
 
 type Cache struct {
