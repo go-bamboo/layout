@@ -2,8 +2,8 @@ package start
 
 import (
 	"context"
+	"github.com/go-bamboo/layout/cmd/server/di"
 	"github.com/go-bamboo/layout/internal/conf"
-	"github.com/go-bamboo/layout/internal/di"
 	"github.com/go-bamboo/pkg/config"
 	"github.com/go-bamboo/pkg/log"
 	"github.com/go-bamboo/pkg/otel"
