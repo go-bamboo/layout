@@ -53,7 +53,7 @@ func run(ctx context.Context) error {
 	}
 
 	// trace
-	if err := otel.Create(bc.Trace, bc.Service.Name, id); err != nil {
+	if err := otel.Create(bc.Trace, bc.Service.Name, id, bc.Service.Version); err != nil {
 		log.Errorf("err: %v", err.Error())
 		return err
 	}

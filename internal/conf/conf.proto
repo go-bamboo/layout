@@ -3,7 +3,7 @@ package layout.internal.conf;
 
 option go_package = "github.com/go-bamboo/layout/internal/conf;conf";
 
-import "log/conf.proto";
+import "log/core/conf.proto";
 import "otel/conf.proto";
 import "registry/conf.proto";
 import "rpc/conf.proto";
@@ -19,7 +19,7 @@ message Bootstrap {
   Data data = 3;
   registry.Conf reg = 4;
   otel.Conf trace = 5;
-  repeated log.Conf logger = 6;
+  repeated log.core.Conf logger = 6;
 }
 
 message Service {
