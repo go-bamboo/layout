@@ -8,9 +8,9 @@ import "otel/conf.proto";
 import "registry/conf.proto";
 import "rpc/conf.proto";
 import "rest/conf.proto";
-import "client/redis/conf.proto";
+import "store/redis/conf.proto";
 import "store/mongox/conf.proto";
-import "store/gormx/conf.proto";
+import "store/gormx/conf/conf.proto";
 import "google/protobuf/duration.proto";
 
 message Bootstrap {
@@ -33,5 +33,5 @@ message Server {
 }
 
 message Data {
-  store.gormx.Conf database = 1;
+  store.gormx.conf.Conf database = 1;
 }

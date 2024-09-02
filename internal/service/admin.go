@@ -7,12 +7,16 @@ import (
 	"github.com/go-bamboo/layout/internal/biz"
 )
 
+var _ pb.LayoutAdminHTTPServer = (*AdminService)(nil)
+
 type AdminService struct {
-	pb.UnimplementedLayoutAdminServer
+	uc *biz.GreeterUsecase
 }
 
 func NewAdminService(uc *biz.GreeterUsecase) *AdminService {
-	return &AdminService{}
+	return &AdminService{
+		uc: uc,
+	}
 }
 
 func (s *AdminService) PageBot(ctx context.Context, req *pb.PageBotRequest) (*pb.PageBotReply, error) {
