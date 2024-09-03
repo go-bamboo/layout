@@ -28,15 +28,18 @@ func (s *V1Service) Hello(ctx *gin.Context) {
 func (s *V1Service) ChainBotWebHook(ctx *gin.Context) {
 	bytes, err := io.ReadAll(ctx.Request.Body)
 	if err != nil {
-		ctx.AbortWithError(http.StatusInternalServerError, err)
+		if err := ctx.AbortWithError(http.StatusInternalServerError, err); err != nil {
+			log.Error(err)
+		}
 		return
 	}
 	log.Debug(string(bytes))
 	var data map[string]interface{}
 	if err := json.Unmarshal(bytes, &data); err != nil {
-		ctx.AbortWithError(http.StatusInternalServerError, err)
+		if err := ctx.AbortWithError(http.StatusInternalServerError, err); err != nil {
+			log.Error(err)
+		}
 		return
 	}
 	ctx.AbortWithStatus(http.StatusOK)
-	return
 }

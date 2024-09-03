@@ -1,31 +1,27 @@
 package dao
 
-import (
-	"fmt"
-)
-
-const (
-	_prefixChainAddress = "address_%s_%s" // mid -> key:server
-	_prefixMidServer    = "app_uid_%d"    // mid -> key:server
-	_prefixKeyServer    = "key_%s"        // key -> server
-	_prefixServerOnline = "ol_%s"         // server -> online
-)
-
-func keyChainAddress(chain string, addr string) string {
-	return fmt.Sprintf(_prefixChainAddress, chain, addr)
-}
-
-func keyMidApp(mid uint64) string {
-	return fmt.Sprintf(_prefixMidServer, mid)
-}
-
-func keyKeyServer(key string) string {
-	return fmt.Sprintf(_prefixKeyServer, key)
-}
-
-func keyServerOnline(key string) string {
-	return fmt.Sprintf(_prefixServerOnline, key)
-}
+//const (
+//	_prefixChainAddress = "address_%s_%s" // mid -> key:server
+//	_prefixMidServer    = "app_uid_%d"    // mid -> key:server
+//	_prefixKeyServer    = "key_%s"        // key -> server
+//	_prefixServerOnline = "ol_%s"         // server -> online
+//)
+//
+//func keyChainAddress(chain string, addr string) string {
+//	return fmt.Sprintf(_prefixChainAddress, chain, addr)
+//}
+//
+//func keyMidApp(mid uint64) string {
+//	return fmt.Sprintf(_prefixMidServer, mid)
+//}
+//
+//func keyKeyServer(key string) string {
+//	return fmt.Sprintf(_prefixKeyServer, key)
+//}
+//
+//func keyServerOnline(key string) string {
+//	return fmt.Sprintf(_prefixServerOnline, key)
+//}
 
 // AddCacheApp
 // func (d *dao) AddCacheApp(c context.Context, app *model.NcscApp) (err error) {
