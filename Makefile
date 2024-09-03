@@ -51,6 +51,10 @@ proto:
            --validate_out=lang=go,paths=source_relative:. \
            ./internal/conf/conf.proto
 
+.PHONY: linter
+linter:
+	golangci-lint run
+
 .PHONY: build
 build:
 	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION) -X main.Branch=$(BRANCH) -X main.Revision=$(REVISION) -X main.BuildDate=$(BUILD_DATE)" -o ./bin/ ./...

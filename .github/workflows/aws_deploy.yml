@@ -1,0 +1,42 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Deploy to Vultr
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go 
+        uses: actions/setup-go@v3
+        with: 
+          go-version: "1.20"
+
+      - name: Set up GOPRIVATE
+        run: go env -w GOPRIVATE="github.com/go-bamboo/api"
+
+      - name: Set up git
+        # 这里还是需要换个用户名
+        run: git config --global url."https://${{ secrets.USERNAME }}:${{ secrets.ACCESS_TOKEN }}@github.com".insteadof "https://github.com"
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.60
+
+      - name: Test
+        run: make test
+
+      - name: Build
+        run: make build
