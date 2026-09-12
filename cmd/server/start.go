@@ -1,14 +1,17 @@
-package start
+package main
 
 import (
 	"context"
-	"github.com/go-bamboo/layout/cmd/server/di"
+
 	"github.com/go-bamboo/layout/internal/conf"
+	"github.com/go-bamboo/layout/internal/di"
 	"github.com/go-bamboo/pkg/config"
 	"github.com/go-bamboo/pkg/log"
+	"github.com/go-bamboo/pkg/log/sugar"
 	"github.com/go-bamboo/pkg/otel"
 	"github.com/go-bamboo/pkg/registry"
 	"github.com/go-bamboo/pkg/uuid"
+	"github.com/go-kratos/kratos/v2/encoding/yaml"
 	"github.com/spf13/cobra"
 
 	_ "github.com/go-bamboo/pkg/config/file"
@@ -19,7 +22,7 @@ import (
 )
 
 var (
-	Cmd = &cobra.Command{
+	startCmd = &cobra.Command{
 		Use:   "start",
 		Short: "start",
 		Long:  `entry`,
@@ -32,18 +35,20 @@ var (
 )
 
 func init() {
-	Cmd.Flags().StringVar(&cfg, "conf", "file:///../../configs/conf.yaml", "url for config eg: file:///../../configs/conf.yaml")
+	startCmd.Flags().StringVar(&cfg, "conf", "file:///../../configs/conf.yaml", "url for config eg: file:///../../configs/conf.yaml")
 }
 
 func run(ctx context.Context) error {
 	var bc conf.Bootstrap
-	config.Load(cfg, &bc)
+	config.Load(cfg, &bc, yaml.Name)
 
-	logger := log.Init(bc.Logger)
+	logger := log.Init(bc.Logger, sugar.WithVersion(Version))
 	defer logger.Close()
 
 	// uuid
 	id := uuid.New()
+	bc.Service.Version = Version
+	bc.Service.Id = id
 
 	// consul
 	r, d, err := registry.Create(bc.Reg)

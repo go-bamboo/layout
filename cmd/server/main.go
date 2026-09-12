@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/go-bamboo/layout/cmd/server/start"
 	"github.com/go-bamboo/pkg/log"
 	"github.com/spf13/cobra"
 )
@@ -31,8 +30,8 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(Cmd)
-	rootCmd.AddCommand(start.Cmd)
+	rootCmd.AddCommand(startCmd)
+	rootCmd.AddCommand(versionCmd)
 }
 
 func main() {

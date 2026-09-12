@@ -25,6 +25,7 @@ message Bootstrap {
 message Service {
   string name = 1;
   string version = 2;
+  string id = 3;
 }
 
 message Server {

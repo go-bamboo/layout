@@ -338,6 +338,8 @@ func (m *Service) validate(all bool) error {
 
 	// no validation rules for Version
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return ServiceMultiError(errors)
 	}
