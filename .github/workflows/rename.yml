@@ -1,0 +1,61 @@
+name: Rename Project
+
+# 手动触发，只用一次：在 GitHub 上 "Use this template" 创建新仓库后，
+# 到 Actions 页面手动 Run workflow，即可自动完成所有改名操作。
+on:
+  workflow_dispatch:
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.20"
+
+      - name: Replace module path
+        run: |
+          OLD="github.com/go-bamboo/layout"
+          NEW="github.com/${{ github.repository }}"
+          echo "Replacing $OLD -> $NEW"
+          # 全局替换所有 .go / .proto / .yaml / .yml / .md 文件中的 module 路径
+          # 生成文件（.pb.go / wire_gen.go / *.gen.go）的 import 也是纯字符串，sed 替换即可
+          find . -type f \( -name "*.go" -o -name "*.proto" -o -name "*.yaml" -o -name "*.yml" -o -name "*.md" \) \
+            -exec sed -i "s|${OLD}|${NEW}|g" {} +
+
+      - name: Replace service name
+        run: |
+          NEW_NAME="${{ github.event.repository.name }}"
+          echo "Replacing service name -> $NEW_NAME"
+          # main.go 中的 rootCmd（Use / Short / Long）
+          sed -i 's|Use:   "layout"|Use:   "'"$NEW_NAME"'"|g' cmd/server/main.go
+          sed -i 's|Short: "layout"|Short: "'"$NEW_NAME"'"|g' cmd/server/main.go
+          sed -i 's|Long:  `layout,`|Long:  `'"$NEW_NAME"',`|g' cmd/server/main.go
+          # configs/*.yaml 中的 service.name
+          sed -i 's|name: layout|name: '"$NEW_NAME"'|g' configs/*.yaml
+
+      - name: Tidy and verify
+        run: |
+          go mod tidy
+          go build ./...
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: rename project to ${{ github.repository }}"
+          git push
+
+      - name: Summary
+        run: |
+          echo "### ✅ Project renamed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "- Module path: \`github.com/${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Service name: \`${{ github.event.repository.name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "Run \`git pull\` to get the changes." >> $GITHUB_STEP_SUMMARY
